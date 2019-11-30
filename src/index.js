@@ -12,21 +12,20 @@ const { Header, Footer, Content } = Layout;
 
 class App extends Component{
     render(){
-        return(
-            <div>
-                <Layout style={{minWidth:1300}}>
-                    <Header className="header"><AppHeader/></Header>
-                    <Content className="content">
-                        <BrowserRouter>
-                            <Switch>
-                                <Route path='/detail' component={Detail}></Route>
-                                <Route path='/' component={List}></Route>
-                            </Switch>
-                        </BrowserRouter>
-                    </Content>
-                    <Footer className="footer">Footer</Footer>
-                </Layout>
-            </div>
+        return(   
+           <Layout style={{minWidth:1300, height:'100%'}}>
+               <Header className="header"><AppHeader/></Header>
+               <Content className="content">
+                   <BrowserRouter>
+                       <Switch>
+                           <Route path='/detail' component={Detail}></Route>
+                           <Route path='/' component={List}></Route>
+                       </Switch>
+                   </BrowserRouter>
+               </Content>
+               <Footer className="footer">@copyright Aaron 2019</Footer>
+           </Layout>
+    
         )
     }
 }
