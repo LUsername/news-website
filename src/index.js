@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import AppHeader from './components/Header/index';
+import Login from './components/Login';
 import Detail from './containers/Detail';
 import List from './containers/List';
 import 'antd/dist/antd.css';
@@ -16,7 +17,8 @@ class App extends Component{
             <BrowserRouter>
                 <Layout style={{minWidth:1300, height:'100%'}}>
                     <Header className="header"><AppHeader/></Header>
-                    <Content className="content">         
+                    <Content className="content">   
+                        <Login />     
                         <Switch>
                             <Route path='/detail/:id' component={Detail}></Route>
                             <Route path='/:id?' component={List}></Route>
