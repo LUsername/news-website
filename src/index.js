@@ -18,7 +18,7 @@ class App extends Component{
                     <Header className="header"><AppHeader/></Header>
                     <Content className="content">         
                         <Switch>
-                            <Route path='/detail' component={Detail}></Route>
+                            <Route path='/detail/:id' component={Detail}></Route>
                             <Route path='/:id?' component={List}></Route>
                         </Switch>
                     </Content>

@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { List } from 'antd';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 class NewList extends Component{
@@ -27,7 +28,10 @@ class NewList extends Component{
                 style={{background:'#fff'}}
                 bordered
                 dataSource={this.state.data}
-                renderItem={item => <List.Item>{item.title}</List.Item>}
+                renderItem={item => 
+                    <List.Item>
+                        <Link to={`/detail/${item.id}`}>{item.title}</Link>
+                    </List.Item>}
             />
         )
     }
