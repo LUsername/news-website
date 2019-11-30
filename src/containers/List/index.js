@@ -11,6 +11,16 @@ class NewList extends Component{
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        const id = nextProps.match.params.id;
+        axios.get('http://www.dell-lee.com/react/api/list.json?id='+id)
+        .then((res)=>{
+            this.setState({
+                data:res.data.data
+            });
+        })
+    }
+
     render(){
         return(
             <List
@@ -23,8 +33,12 @@ class NewList extends Component{
     }
 
     componentDidMount(){
+        let url = 'http://www.dell-lee.com/react/api/list.json';
         const id = this.props.match.params.id;
-        axios.get('http://www.dell-lee.com/react/api/list.json?id='+id)
+        if(id){
+            url += '?id='+id;
+        }
+        axios.get(url)
         .then((res)=>{
             this.setState({
                 data:res.data.data
