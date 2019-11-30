@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import { Modal,Button,Input,message } from 'antd';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import './style.css';
 
 class Login extends Component{
@@ -77,6 +77,7 @@ class Login extends Component{
                     login:false
                 })
             }
+            this.props.history.push('/');
         })
     }
 
@@ -136,4 +137,4 @@ class Login extends Component{
     }
 }
 
-export default Login;
+export default withRouter(Login);
