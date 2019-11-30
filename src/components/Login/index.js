@@ -17,6 +17,7 @@ class Login extends Component{
         this.changeUser = this.changeUser.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.checkLogin = this.checkLogin.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     showModal(){
@@ -48,12 +49,32 @@ class Login extends Component{
     checkLogin(){
         const {user,password} = this.state;
         const url = `http://www.dell-lee.com/react/api/login.json?user=${user}&password=${password}`;
-        axios.get(url).then(res=>{
+        axios.get(url,{
+            withCredentials:true
+        }).then(res=>{
             const login = res.data.data.login;
             if (login) {
                 message.success('登录成功');
+                this.setState({
+                    modal:false,
+                    login:true
+                });
             }else{
                 message.error('登录失败');
+            }
+        })
+    }
+
+    logout(){
+        axios.get('http://www.dell-lee.com/react/api/logout.json',{
+            withCredentials:true
+        })
+        .then(res=>{
+            const data = res.data.data;
+            if (data.logout) {
+                this.setState({
+                    login:false
+                })
             }
         })
     }
@@ -64,7 +85,10 @@ class Login extends Component{
             <div className='login'>
                 {
                     login ?
-                    <Button type="primary">退出</Button> :
+                    <Button 
+                        type="primary"
+                        onClick={this.logout}
+                    >退出</Button> :
                     <Button 
                         type="primary"
                         onClick={this.showModal}
@@ -94,7 +118,9 @@ class Login extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://www.dell-lee.com/react/api/isLogin.json')
+        axios.get('http://www.dell-lee.com/react/api/isLogin.json',{
+            withCredentials:true
+        })
         .then(res=>{
             const login =res.data.data.login;
             this.setState({login});
