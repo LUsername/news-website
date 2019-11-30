@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Modal,Button,Input } from 'antd';
+import { Modal,Button,Input,message } from 'antd';
 import axios from 'axios';
 import './style.css';
 
@@ -16,6 +16,7 @@ class Login extends Component{
         this.hideModal =this.hideModal.bind(this);
         this.changeUser = this.changeUser.bind(this);
         this.changePassword = this.changePassword.bind(this);
+        this.checkLogin = this.checkLogin.bind(this);
     }
 
     showModal(){
@@ -44,6 +45,19 @@ class Login extends Component{
         })
     }
 
+    checkLogin(){
+        const {user,password} = this.state;
+        const url = `http://www.dell-lee.com/react/api/login.json?user=${user}&password=${password}`;
+        axios.get(url).then(res=>{
+            const login = res.data.data.login;
+            if (login) {
+                message.success('登录成功');
+            }else{
+                message.error('登录失败');
+            }
+        })
+    }
+
     render(){
         const {login} = this.state;
         return(
@@ -59,7 +73,7 @@ class Login extends Component{
                 <Modal
                   title="登录"
                   visible={this.state.modal}
-                  onOk={()=>{}}
+                  onOk={this.checkLogin}
                   onCancel={this.hideModal}
                 >
                     <Input 
