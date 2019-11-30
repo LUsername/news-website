@@ -23,7 +23,8 @@ class NewList extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://www.dell-lee.com/react/api/list.json')
+        const id = this.props.match.params.id;
+        axios.get('http://www.dell-lee.com/react/api/list.json?id='+id)
         .then((res)=>{
             this.setState({
                 data:res.data.data
