@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { Modal,Button,Input,message } from 'antd';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import './style.css';
 
 class Login extends Component{
@@ -94,6 +95,13 @@ class Login extends Component{
                         onClick={this.showModal}
                     >登录</Button>
                 }
+                <Link to='/vip'>
+                    <Button 
+                        type="primary"
+                        style={{marginLeft:10}}
+                        >Vip
+                    </Button>
+                </Link>
                 <Modal
                   title="登录"
                   visible={this.state.modal}
