@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Modal,Button } from 'antd';
+import { Modal,Button,Input } from 'antd';
 import axios from 'axios';
 import './style.css';
 
@@ -8,15 +8,40 @@ class Login extends Component{
         super(props);
         this.state = {
             login:false,
-            modal:false
+            modal:false,
+            user:'',
+            password:''
         }
         this.showModal =this.showModal.bind(this);
+        this.hideModal =this.hideModal.bind(this);
+        this.changeUser = this.changeUser.bind(this);
+        this.changePassword = this.changePassword.bind(this);
     }
 
     showModal(){
         this.setState({
             modal:true
         });
+    }
+
+    hideModal(){
+        this.setState({
+            modal:false,
+            user:'',
+            password:''
+        });
+    }
+
+    changeUser(e){
+        this.setState({
+            user:e.target.value
+        })
+    }
+
+    changePassword(e){
+        this.setState({
+            password:e.target.value
+        })
     }
 
     render(){
@@ -35,11 +60,20 @@ class Login extends Component{
                   title="登录"
                   visible={this.state.modal}
                   onOk={()=>{}}
-                  onCancel={()=>{}}
+                  onCancel={this.hideModal}
                 >
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
+                    <Input 
+                        placeholder="请输入用户名"
+                        style={{marginBottom:10}} 
+                        value={this.state.user}    
+                        onChange = {this.changeUser}
+                    />
+                    <Input 
+                        placeholder="请输入密码" 
+                        type='password'
+                        value={this.state.password}
+                        onChange = {this.changePassword}
+                    />
                 </Modal>
             </div>
         );
